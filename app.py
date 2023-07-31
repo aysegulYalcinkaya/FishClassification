@@ -34,7 +34,9 @@ def index():
                                   columns=["Weight", "Length1", "Length2", "Length3", "Height", "Width"])
         result = classify_input(input_data)
 
-    return render_template('index.html', result=result)
+        return render_template('index.html', result=result)
+    else:
+        return render_template('index.html')
 
 
 if __name__ == '__main__':
