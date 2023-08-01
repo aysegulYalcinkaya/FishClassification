@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import sklearn
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def classify_input(input_data):
 
     result = classifier_model.predict(input_data)
 
-    return result
+    return result.tolist()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -34,7 +34,7 @@ def index():
                                   columns=["Weight", "Length1", "Length2", "Length3", "Height", "Width"])
         result = classify_input(input_data)
 
-        return render_template('index.html', result=result)
+        return jsonify(result)
     else:
         return render_template('index.html')
 
